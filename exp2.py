@@ -15,28 +15,23 @@ d = dict()
 interval = 900
 
 n =  0 #number of bins
-for i in range(minTime , maxTime + 1, interval):
+
+for i in range(minTime , maxTime + 1, interval): #initialize the dictionary
     d[i] = 0
     n +=1
 
-print(n)
 
-
-for i in data["startTime"]:
-
-    #print(i)
+for i in data["startTime"]: #For each entry, determine which bin it must be placed into
     diff = i - minTime
-    #print(diff)
-    bin = math.floor(diff/interval)
-    #print(bin)
-    k = minTime+(bin*interval)
+    bin = math.floor(diff/interval) #Find the bin number
+    k = minTime+(bin*interval)      #get the time associated with bin number
     d[k] += 1
 
 x = list(sorted(d.keys()))
 y = [value for (key,value) in sorted(d.items())]
 
-maxActivity = max(d, key = lambda k: d[k])
-minActivity = min(d, key = lambda k: d[k])
+maxActivity = max(d, key = lambda k: d[k])  #Find the bin with max encounters
+minActivity = min(d, key = lambda k: d[k])  #Find the bin with min encounters
 print("Time of maximum activity is "+ str(maxActivity))
 print("Time of minimum activity is "+ str(minActivity))
 
