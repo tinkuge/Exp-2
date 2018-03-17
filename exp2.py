@@ -3,13 +3,12 @@ import numpy as num
 import matplotlib.pyplot as plot
 import hashlib as hash
 import math
+import time
 data = pan.read_csv('outputwireless-logs-20120409.DHCP_ANON.csv')
 
 minTime = min(data["startTime"])
-print(minTime)
 
 maxTime = max(data["startTime"])
-print(maxTime)
 
 d = dict()
 
@@ -33,6 +32,12 @@ for i in data["startTime"]:
 
 x = list(sorted(d.keys()))
 y = [value for (key,value) in sorted(d.items())]
+
+maxActivity = max(d, key = lambda k: d[k])
+minActivity = min(d, key = lambda k: d[k])
+print("Time of maximum activity for 15 minute interval is "+ str(maxActivity))
+print("Time of minimum activity for 15 minute interval is "+ str(minActivity))
+
 
 plot.plot(x,y)
 plot.xlabel('Time in seconds')
